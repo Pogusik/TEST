@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Эффект перекатывания</title>
+<script>
+window.addEventListener('load', function() {
+const image1 = document.querySelector('.separator-image');
+image1.classList.add('circlingImage');
+
+setTimeout(function() {
+image1.style.animation = 'none';
+}, 2000);
+});
+
+window.addEventListener('load', function() {
+const image2 = document.querySelector('.background');
+image2.classList.add('backgroundAnima');
+
+setTimeout(function() {
+image2.style.animation = 'none';
+}, 2000);
+});
+
+window.addEventListener('load', function() {
+const textContainer = document.querySelector('.text-container');
+textContainer.classList.add('circlingText');
+
+setTimeout(function() {
+textContainer.style.animation = 'none';
+textContainer.classList.add('show');
+}, 2000);
+});
+
+window.addEventListener('load', function() {
+const textContainer = document.querySelector('.text-container2');
+textContainer.classList.add('circlingText2');
+
+setTimeout(function() {
+textContainer.style.animation = 'none';
+textContainer.classList.add('show2');
+}, 2000);
+});
+
+function copyToClipboard(text, element) {
+  navigator.clipboard.writeText(text).then(function() {
+    // Создаем уведомление
+    const notification = document.createElement('div');
+    notification.textContent = 'Скопировано в буфер обмена: ' + text;
+    notification.style.position = 'absolute';
+    notification.style.top = element.offsetTop - 30 + 'px'; // Выравниваем сверху
+    notification.style.left = element.offsetLeft + 'px'; // Выравниваем слева
+    notification.style.padding = '10px';
+    notification.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+    notification.style.color = 'white';
+    notification.style.zIndex = '1000';
+    notification.style.borderRadius = '20px'; // Скругленные края
+    notification.style.fontFamily = 'sans-serif';
+
+    notification.style.transition = 'opacity 500ms ease-in-out';
+    notification.style.opacity = 0; // Скрываем уведомление по умолчанию
+
+    // Добавляем уведомление на страницу
+    document.body.appendChild(notification);
+
+    // Показываем уведомление с анимацией после добавления
+    setTimeout(() => {
+      notification.style.opacity = 1;
+    }, 300);
+    setTimeout(() => {
+      notification.style.opacity = 0;
+    }, 1800);
+    // Удаляем уведомление через 3 секунды
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 2200);
+  }, function(err) {
+    console.error('Ошибка копирования: ', err);
+  });
+}
+  
+</script>
+  <style>
+    html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%
+}
+     .backgroundBlock {
+    background-color: rgba(25,50,5,50%);
+    width: 500px; 
+    height: 135px; 
+    background-color: black; 
+    position: absolute;
+    top: 28px;
+    left: -350px; 
+    z-index: 2;
+  }
+
+  .backgroundD {
+    background-color: rgba(25,50,5,0.5);
+    width: 125px; 
+    height: 135px; 
+    border-radius: 50%;
+    background-color: black; 
+    position: absolute;
+    top: 28px;
+    left: 80px; 
+    z-index: 2;
+  }
+    /* Ваши стили остаются прежними */
+    .clickable {
+      cursor: pointer;
+      text-decoration: underline;
+      color: #dbdbdb; /* Цвет текста */
+    }
+    .clickable:hover {
+      color: #CD3382; /* Цвет текста при наведении */
+    }
+  </style>
+<style>
+  @import url(https://db.onlinewebfonts.com/c/b406d1754e314482800109a210c3ef1a?family=ITC+Bauhaus+Demi); [2](https://www.onlinewebfonts.com/download/b406d1754e314482800109a210c3ef1a)
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 100;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Xw0aXpsog.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+     .semiopacityY {
+          border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет фона и значение прозрачности */
+    color: #fff; /* Цвет текста */  
+                height: 170px;
+width: 97.5%;
+   }
+  .separator-image { 
+    position: relative;
+    top: 30px;
+    left: 0px;
+    display: inline-block; 
+    margin-left: 70px;
+
+    transition: all 0.5s ease-in-out;
+    z-index: 3;
+  }
+
+  .separator-image.circlingImage {
+    animation: anima 2s linear infinite;
+  }
+
+  @keyframes anima {
+    50% { transform: rotate(180deg);}
+    100% { transform: rotate(360deg); } 
+  }
+
+
+  .text-container {
+    position: relative; 
+    top: -105px;
+    left: -1000px;
+    z-index: 1;
+  }
+
+  .text-container2 {
+    position: relative; 
+    top: -140px;
+    left: -1000px;
+    z-index: 1;
+  }
+
+  .text-container.show {
+    left: 200px; 
+  }
+
+  .text-container2.show2 {
+    left: 200px; 
+  }
+
+  .text-container.circlingText {
+    animation: slide-right 2s ease-in-out; 
+  }
+
+  .text-container2.circlingText2 {
+    animation: slide-right 2s ease-in-out; 
+  }
+
+  @keyframes slide-right {
+    0% { left: -1000px; } 
+    100% { left: 200px; } 
+  }
+
+</style>
+  <div class=backgroundD></div>
+<div class=semiopacityY>
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+<img src="https://i.imgur.com/G5LzCwB.png" width="120px" alt="Разделитель" class="separator-image">
+<div class="text-container">
+  <p style="font-family: 'ITC Bauhaus Demi', sans-serif;
+       font-size: 40px; 
+       text-decoration: underline;
+       font-weight: bold;">
+    Милитаризованный участок Зоны-02
+  </p>
+</div>
+  <div class=backgroundBlock></div>
+<div class="text-container2">
+<p style="font-family: 'ITC Bauhaus Demi', sans-serif;
+    font-size: 16px; 
+    font-weight: bold;
+    font-weight: italiac;">
+  SCP Foundation
+</p>
+</div></div>
+<br>
+   <style>
+
+    h1{
+       font-size: 20pt;
+      letter-spacing: .14rem;
+     text-shadow: 0 3px 6px rgba(255, 255, 255, .25);
+    }
+    /*База для кнопки объекта*/      
+
+    .rimg {
+
+    float: left;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 12pt;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px; /* Радиус скругления */
+    margin: 10px auto 5px 1.6%;
+    padding: 1em; /* Поля вокруг текста */
+}  
+       img.animate2 {
+
+    filter: alpha (Opacity=0);
+
+    opacity: 0;
+
+    -moz-transition: all 0.5s ease-in-out; /* эффект перехода для Firefox до версии 16.0 */
+
+    -webkit-transition: all 0.5s ease-in-out; /* эффект перехода для Chrome до версии 26.0, Safari, Android и iOS */
+
+    -o-transition: all 0.5s ease-in-out; /* эффект перехода для Opera до версии 12.10 */
+
+    transition: all 0.5s ease-in-out; /* эффект перехода для других браузеров */
+
+  position: absolute;
+
+  width: 200px;
+  height: 200px;
+         border-radius: 7px; /* Радиус скругления */
+}
+
+img.animate2:hover {
+
+    filter: alpha (Opacity=100);
+
+    opacity: 1;
+
+}
+    
+    
+    
+    img.sws{
+      vertical-align: middle;
+    }
+    
+    
+    
+    img.cls{
+      
+      border-radius: 10px; /* Радиус скругления */
+    } 
+    
+    /*Ниже будет система развёртывающегося списка*/
+    
+    
+    
+details{
+  display:block;
+  overflow:hidden;
+  margin-bottom: 2rem;
+
+}
+summary::-webkit-details-marker{display:none;}
+summary::-moz-list-bullet{list-style-type:none;}
+summary::marker{display:none;} 
+summary {
+   display:block;
+   padding: .3em 1em .3em .9em;
+
+  border-radius: 10px;
+  background: #292929;
+
+  border: solid 3px #dbdbdb;
+   list-style: none;
+}
+summary:before {  
+
+
+  color: transparent;
+  background: url("https://i.pinimg.com/originals/f9/7c/4c/f97c4c8d642000b871f5a3faac75b422.png") no-repeat 50% 50% / 1em 1em;
+  width: 1em;
+  height: 2em;  
+  content: "";
+  position: absolute;
+  transition: transform .5s;
+}
+details[open] > summary:before {
+  transform: scale(1,-1);
+}
+summary ~ * {
+   padding: 0 1em 10px 1.4em;
+}
+details[open] summary ~ *{ 
+  animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0;}
+  100%  {opacity: 1;}
+}
+summary:focus {
+  outline:0;
+  box-shadow: inset 0 0 1px rgba(0,0,0,0.3), inset 0 0 2px rgba(0,0,0,0.3);
+}
+     
+    
+    ::-webkit-scrollbar {
+  width: 0;
+}
+        /*Ниже будет фон для текста*/
+   .semiopacity {
+          border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет фона и значение прозрачности */
+    padding: 10px; /* Поля вокруг текста */
+    color: #fff; /* Цвет текста */   
+     height: 1040px;
+width: 96%;
+   }
+       .semiopacityI {
+          border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.3); /* Цвет фона и значение прозрачности */
+    padding: 10px; /* Поля вокруг текста */
+    color: #fff; /* Цвет текста */   
+         
+    padding: 2%; /* Поля вокруг текста */
+
+            margin-left: 5%;
+  margin-right: 5%;
+   }
+       .semiopacityR { 
+  overflow: hidden;
+          border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.3); /* Цвет фона и значение прозрачности */
+    padding: 20.6px; /* Поля вокруг текста */
+         height: 31%;
+   margin-left: 5%;
+                           width: 40%;
+  margin-right: 10px;
+       float: left;
+         
+   }
+                .semiopacityL {
+                  
+          border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.3); /* Цвет фона и значение прозрачности */
+    padding: 20.6px; /* Поля вокруг текста */
+         height: 31%;
+                  width: 40%;
+  margin-right: 5%;
+
+         float: right;
+                  
+   }
+    .wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.fade-in {
+  opacity: 0; /* начальное значение непрозрачности */
+  animation: fadeIn ease-in 1; /* добавляем анимацию fadeIn */
+  animation-fill-mode: forwards; /* будет видимым после завершения анимации */
+  animation-duration: 1s; /* длительность анимации в 1 секунду */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+    .wrapper.four {
+
+    font-size: 24px;
+
+}
+.four .type{
+    padding: 2rem 1rem;
+    width: auto;
+    margin: auto;
+}
+.four h3 {
+    width: 20ch;
+    border-right: 3px solid #fff;
+    margin: 1rem auto;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(19, end), blink-caret 0.5s step-end infinite alternate;
+}
+@-webkit-keyframes typing {
+    from {
+        width: 0;
+    }
+}
+@-webkit-keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+}
+
+
+   
+    </style>
+ </head>
+ <body>
+   <div class="semiopacity"><br><hr width=65% size=3 color=#dbdbdb noshade><font color="#dbdbdb" face="sans-serif" size=6><div align=center>Вы были успешно авторизованы.<br>        <div class="type">
+               <div class="wrapper four"> <h3 class="typing"><font color="#dbdbdb" face="sans-serif">Доступ <font color="#Adbdb">подтверждён.</h3></div>
+        </div></font></font> </div><br><br><div class="semiopacityR"> 
+     <font color="#dbdbdb" face="sans-serif" size=4><font color="#dbdbdb" face="sans-serif" size=5><div align=center><p class="fade-in">Тихой ночи.<hr width=60%></div></font>
+     </p><p class="fade-in"> Вы находитесь на сайте отдела MediumRP FLX Project серверу по игре SCP: Secret Laboratory. На нашем сервере мы придерживаемся строгой отыгровки игровых персонажей, однако допускаем правки в лоре вселенной SCP, дабы достичь идеального баланса для игры на нашем сервере.
+<br><br>
+Перед игрой на сервере обязательно ознакомьтесь с правилами и объектами, поставленными на содержание в Милитаризованном Участе 02. <br><br></div><div class="semiopacityL"> </p><p class="fade-in">
+     <font size=5> <a href=https://discord.gg/flx-project><img class="sws"src="https://static.miraheze.org/rainworldwiki/4/4b/Discord-logo-blurple.png" width=60><font color="#dbdbdb"><u>FLX Project</a></font></a></u><br><br> ᠌ ᠌ ᠌<a href=https://docs.google.com/document/d/1OHjGHZ2ZPix0PTf4ubDl59fjzEIwEm7sjCOvENO0Cks/edit#headingh.cz0n24xyvgjw><img class="sws"src="https://upload.ruwiki.ru/commonswiki/files/thumb/6/66/Google_Docs_2020_Logo.svg/1200px-Google_Docs_2020_Logo.svg.png" width=30><font color="#dbdbdb"></a>    ᠌ ᠌ ᠌<a href=https://docs.google.com/document/d/1OHjGHZ2ZPix0PTf4ubDl59fjzEIwEm7sjCOvENO0Cks/edit#heading=h.cz0n24xyvgjw><font color="#dbdbdb"><u>Правила</a></font></a><br><font color="#dbdbdb" size=4></u><hr width=90%><p class="fade-in"> ᠌ ᠌ ᠌ ᠌<font size=6.5em >IP Адреса:<br><font size=4> ᠌ ᠌ ᠌ ᠌      <font color="#dbdbdb" size=5 style="font-family:'ITC Bauhaus Demi'">
+       <u class="clickable" onclick="copyToClipboard('mrp1.flxproject.ru', this)">mrp1.flxproject.ru</u> — <font color="#CD3382" size=5>MediumRP 1</font><br><br>
+    <font size=4> ᠌ ᠌ ᠌ ᠌      <font color="#dbdbdb" size=5 style="font-family:'ITC Bauhaus Demi';">   <u class="clickable" onclick="copyToClipboard('mrp2.flxproject.ru', this)">mrp2.flxproject.ru</u> — <font color="#CD3382" size=5>MediumRP 2</font></u>
+      </font></p><br><br><br><br><br><br>
+     </p></div> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="semiopacityI"> <hr width=95%>
+     <a href=https://scpfoundation.net/scp-049> <div class="rimg"><d class="fade-in">    
+  <img src="https://i.imgur.com/KIi8dnG.png" width=180 height=180 class="cls">
+  <br><span><font color="#dbdbdb" size="4"><br>Технические Изменения</span></div>  
+     <a href=https://scpfoundation.net/scp-049> <div class="rimg">    <d class="fade-in">
+  <img src="https://i.imgur.com/1br6IWm.png" width=180 height=180 class="cls">
+  <br><span><font color="#dbdbdb" size="4"><br>Основная информация</span></div> 
+            <a href=https://scpfoundation.net/scp-049> <div class="rimg">    <d class="fade-in">
+  <img src="https://i.imgur.com/0jApG11.png" width=180 height=180 class="cls">
+  <br><span><font color="#dbdbdb" size="4"><br>Новичкам</span></div> 
+                          <a href=https://scpfoundation.net/scp-049> <div class="rimg">    <d class="fade-in">
+  <img src="https://i.imgur.com/CrpYXPi.png" width=180 height=180 class="cls">
+  <br><span><font color="#dbdbdb" size="4"><br>FAQ</span></div> <br><br><br><br><br><br><br><br><br><br><br><br><br><hr width=95%>
+
+                            </div></div></div></div></div></div></div></div></div>
+   <p><a href="#" class="rollover"> </a></p>
+       <br>
+     
+     
+     
+     
+     
+     
+
+  </body>
+</html>
